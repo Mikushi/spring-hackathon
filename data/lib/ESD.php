@@ -1,5 +1,4 @@
 <?php
-require_once "MySQL.php";
 class ESD
 {
     const BASE_URL = "http://production.webservices.esd.org.uk/";
@@ -12,9 +11,13 @@ class ESD
     public function __construct($key, $secret) {
         $this->_key = $key;
         $this->_secret = $secret;
-        $this->_db = MySQL::getInstance()->getConn();
         $this->_ignoreList[] = 'E31000046';
         $this->_ignoreList[] = 'E09000001';
+    }
+
+    public function setMySQL($conn) {
+        $this->_db = $conn;
+        return $this;
     }
 
     public function getMetricDetails($metricId) {
@@ -26,8 +29,8 @@ class ESD
         return $label;
     }
 
-    public function getData($metricId, $postcode) {
-        $pattern = "/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/";
+    public function getData($metricId, $areaCode) {
+       /* $pattern = "/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/";
 
         $postcode = strtolower($postcode);
         if(strlen($postcode)>4 && substr($postcode,-4,1) != ' ') {
@@ -39,8 +42,8 @@ class ESD
         if (!preg_match($pattern, strtoupper($postcode))) {
             return false;
         } else {
-            $areaCode = $this->_getAreaCode(str_replace(" ", "", $postcode)); 
-        }
+            $areaCode = $this->getAreaCode(str_replace(" ", "", $postcode)); 
+        }*/
 
         if($areaCode) {
             $return = [];
@@ -55,6 +58,9 @@ class ESD
                 $url = self::BASE_URL . "InformPlus/data?query1.metricType=$metricId&query1.area=" . $areaCode['area_code'] . "&query1.period=latest";
                 $url = $this->_signUrl($url);
                 $data = $this->_call($url);
+                if(empty($data['rows'])) {
+                    return false;
+                }
 
                 //Save metric label to DB for later processing and understanding
                 $query = "SELECT `desc` FROM `esd-metric` WHERE metric_id = $metricId";
@@ -66,6 +72,7 @@ class ESD
                 } else {
                     $desc = $res->fetch_assoc()['desc'];
                 }
+                echo $desc . PHP_EOL;
 
                 $value = $data['rows'][0]['values'][0]['source'];
                 $query = "INSERT INTO `esd-metric-area`(`metric_id`, `area_id`, `value`) VALUES($metricId, " . $areaCode['area_id'] . ", $value)";
@@ -81,10 +88,7 @@ class ESD
         }
     }
 
-    /************************/
-    /*  INTERNAL FUNCTIONS  */
-    /************************/
-    private function _getAreaCode($postcode) {
+    public function getAreaCode($postcode) {
         $query = "SELECT area_code, ea.id AS area_id
                   FROM `esd-postcode-area` AS epa
                   JOIN `esd-area` AS ea
@@ -105,18 +109,24 @@ class ESD
                     $identifier = $area['governs']['label'];
                     $areaCode = $area['governs']['identifier'];
 
-                    if(in_array($areaCode, $this->_ignoreList)) {
+                    if(in_array($areaCode, $this->_ignoreList) || strstr(strtolower($identifier), "fire")) {
                         continue;
                     }
                     if(!$areaCodeToUse) {
                         $areaCodeToUse = $areaCode;
                     }
 
-                    $query = "INSERT INTO `esd-area` (`identifier`,`area_code`) VALUES('$identifier','$areaCode')";
+                    $query = "INSERT IGNORE INTO `esd-area` (`identifier`,`area_code`) VALUES('$identifier','$areaCode')";
                     $this->_db->query($query);
                     $areaId = $this->_db->insert_id;
                     if(!$areaIdToUse) {
                         $areaIdToUse = $areaId;
+                    }
+                    if($areaId == 0) {
+                        $query = "SELECT id
+                                  FROM `esd-area`
+                                  WHERE area_code = '$areaCode'";
+                        $areaId = $this->_db->query($query)->fetch_assoc()['id'];
                     }
 
                     $query = "INSERT INTO `esd-postcode-area` (`area_id`, `postcode`) VALUES($areaId, '$postcode')";
@@ -131,6 +141,9 @@ class ESD
         return false;
     }
 
+    /************************/
+    /*  INTERNAL FUNCTIONS  */
+    /************************/
     private function _call($url) {
         $ch = curl_init($url);
 
