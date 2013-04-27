@@ -1,8 +1,8 @@
 <html>
 	<head>
-		<title>Tachyon - SimpleSite</title>
+		<title>Areascore - How good is your neighborhood?</title>
 	</head>
 	<body>
-		Hello <?=$this->name?>!
+    Areascore.co.uk
 	</body>
 </html>
