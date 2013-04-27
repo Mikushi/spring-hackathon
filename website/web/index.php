@@ -2,14 +2,12 @@
 set_include_path(
 	get_include_path() .
 	PATH_SEPARATOR .
-	"../../../src/");
+	"../lib/");
 
 require_once "Tachyon/Application.php";
 
-$urls = array("/:test" => function($test) {
-					      echo $test;
-						 },
-			  "/home/:name"=> "Home",
+$urls = array(
+			  "/home"=> "Home",
 			  "404" => function() {
 							echo "Page not found, sad story :'(";
 			  		   }
