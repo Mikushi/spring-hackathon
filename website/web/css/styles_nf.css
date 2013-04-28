@@ -149,7 +149,7 @@ body {
     font-weight: 300;
     background: url("../img/city_bg.png") repeat center;
     color: #F56634;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 a {
