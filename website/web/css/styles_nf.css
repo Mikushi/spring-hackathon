@@ -411,10 +411,8 @@ span.outof {
 }
 
 .footer {
-    vertical-align: middle;
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.3em;
     padding-bottom: 20px;
+    float: left;
+    width: 100%;
 }
