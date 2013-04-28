@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/fontello.css">
 		<link href='http://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	</head>
-	<body>
+	<body style="overflow: hidden;">
     		<div class="container animated fadeInDown">
 				<h1><span>Area</span>Score</h1>
 				<h2>How good is your neighborhood?</h2>
