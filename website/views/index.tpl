@@ -14,7 +14,7 @@
 				<center>
                 <input id="search" type="text" name="search" onclick="this.select();" onfocus="this.select();" onblur="this.placeholder=!this.placeholder?'Type in your postcode and hit enter':this.placeholder;" onkeypress="searchKeyPress(event)" placeholder="Type in your postcode and hit enter" />
 				</center>
-				<p class="headline">Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor fringilla. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+				<p class="headline">AreaScore is your place to check the quality of neighborhood in the Greater London Area!</p>
 				<div class="footer">
 					<a class="animated fadeIn" href="http://about.esd.org.uk/" target="_blank"><img src="img/esd.png"></a>
 				</div>
@@ -38,5 +38,15 @@
             }
         }
         </script>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40502769-1', 'areascore.co.uk');
+  ga('send', 'pageview');
+
+</script>
 	</body>
 </html>
