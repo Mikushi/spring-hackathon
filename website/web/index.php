@@ -7,7 +7,8 @@ set_include_path(
 require_once "Tachyon/Application.php";
 
 $urls = array(
-			  "/home"=> "Home",
+			  "/"=> "Home",
+              "/:postcode" => "Result",
 			  "404" => function() {
 							echo "Page not found, sad story :'(";
 			  		   }
