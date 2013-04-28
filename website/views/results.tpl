@@ -96,7 +96,5 @@
 		<div class="x4"><img src="img/x4.png"></div>
     	<script src="js/highcharts.js"></script>
 		<script src="js/highcharts-more.js"></script>
-		
-		<div id="container" style="width: 94%%; height: 100%; margin: 0 auto"></div>
-	</body>
+		</body>
 </html>
