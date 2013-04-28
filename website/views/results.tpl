@@ -65,9 +65,7 @@
 				<div class="score animated tada">
 					<h3 class="counting"><?=$this->areaScore?></h3><span>POINTS</span><span class="outof">(out of 100)</span>
 				</div>
-				<div class="spider">
-					Here comes the mighty spider X
-				</div>
+				<div id="container"></div>
 				<div class="summary">
 					<h2>Something about <?=$this->areaInfo['identifier']?></h2>
 					<p><?=$this->areaInfo['description']?></p>
