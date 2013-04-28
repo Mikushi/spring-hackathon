@@ -5,6 +5,7 @@ $query = "select ema.metric_id, AVG(value) as average, MIn(value) as minimum, MA
 from `esd-metric-area` as ema
 join `esd-metric` AS em
 on em.metric_id = ema.metric_id
+where em.category IN ('nightlife')
 group by ema.metric_id";
 
 $res = MySQL::getInstance()->getConn()->query($query);

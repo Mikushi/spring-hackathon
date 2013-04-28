@@ -9,7 +9,16 @@ class Result extends \Tachyon\Controller
 
             $this->areaInfo = $scoreFinder->getAreaInfo();
             $this->areaScore = $score['areaScore'];
-            $this->scoreBreakdown = $score['breakdown'];
+            $scoreBreakdown = $score['breakdown'];
+            unset($scoreBreakdown['happiness']);
+            unset($scoreBreakdown['age']);
+            unset($scoreBreakdown['population']);
+            $values = array_values($scoreBreakdown);
+            array_walk($values, function(&$val) {
+                $val = round($val/10, 1);
+            });
+            $this->spider = $values;
+
             $this->render("results.tpl");
         } else {
             $this->redirect("/");

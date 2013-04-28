@@ -67,7 +67,7 @@ class ESD
                 $res = $this->_db->query($query);
                 if($res->num_rows == 0) {
                     $desc = $this->getMetricDetails($metricId);
-                    $query = "INSERT INTO `esd-metric` VALUES($metricId, '$desc')";
+                    $query = "INSERT INTO `esd-metric`(metric_id, `desc`) VALUES($metricId, '$desc')";
                     $this->_db->query($query);
                 } else {
                     $desc = $res->fetch_assoc()['desc'];
@@ -75,7 +75,7 @@ class ESD
                 echo $desc . PHP_EOL;
 
                 $value = $data['rows'][0]['values'][0]['source'];
-                $query = "INSERT INTO `esd-metric-area`(`metric_id`, `area_id`, `value`) VALUES($metricId, " . $areaCode['area_id'] . ", $value)";
+                $query = "INSERT IGNORE INTO `esd-metric-area`(`metric_id`, `area_id`, `value`) VALUES($metricId, " . $areaCode['area_id'] . ", $value)";
                 $this->_db->query($query);
                 $return = ["desc" => $desc, "value" => $value];
             } else {

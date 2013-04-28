@@ -69,7 +69,11 @@ namespace AreaScore
                     $globalScore = 0;
                     $metricCount = 0;
                     while($row = $res->fetch_assoc()) {
-                        $score = $this->_getMetricScore($metricGlobalStats[$row['metric_id']], $row['value']); 
+                        $isCrime = false;
+                        if($metricGlobalStats[$row['metric_id']]['category'] == "crime") {
+                            $isCrime = true;
+                        }
+                        $score = $this->_getMetricScore($metricGlobalStats[$row['metric_id']], $row['value'], $isCrime); 
                         $globalScore += $score;
                         $metricsScore[$metricGlobalStats[$row['metric_id']]['category']][$row['metric_id']] = round($score); 
                         $metricCount++;
@@ -92,12 +96,16 @@ namespace AreaScore
         /************************/
         /*  INTERNAL FUNCTIONS  */
         /************************/
-        private function _getMetricScore($globalStats, $value) {
+        private function _getMetricScore($globalStats, $value, $isCrime) {
             if($value > $globalStats['average']) {
                 $upper = $globalStats['average'] + $globalStats['std_dev'];
                 if($value > $upper) { //Are we out of the standard deviation
                     $perc = round((($globalStats['max'] - $upper) - ($globalStats['max'] - $value)) / ($globalStats['max'] - $upper), 3);
-                    $score = round(60 - (60 * $perc), 2);
+                    if(!$isCrime) {
+                        $score = round(60 - (60 * $perc), 2);
+                    } else {
+                        $score = round(80 + (20 * $perc), 2);
+                    }
                 } else { //Use basic formula if within standard deviation
                     $perc = round((($globalStats['std_dev'] - ($value - $globalStats['average'])) / $globalStats['std_dev']), 3);
                     $score = round(70 - (10 * $perc), 2);
@@ -106,7 +114,11 @@ namespace AreaScore
                 $lower = $globalStats['average'] - $globalStats['std_dev'];
                 if($value < $lower) { //Are we out of the standard deviation
                     $perc = round((($lower - $globalStats['min']) - ($value - $globalStats['min'])) / ($lower - $globalStats['min']), 3);
-                    $score = round(80 + (20 * $perc), 2);
+                    if(!$isCrime) {
+                        $score = round(80 + (20 * $perc), 2);
+                    } else {
+                        $score = round(60 - (60 * $perc), 2);
+                    }
                 } else { //Use basic formula if within standard deviation
                     $perc = round((($globalStats['std_dev'] - ($globalStats['average'] - $value)) / $globalStats['std_dev']), 3);
                     $score = round(70 + (10 * $perc), 2);

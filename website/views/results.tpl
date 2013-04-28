@@ -28,7 +28,7 @@
 				    },
 				    
 				    xAxis: {
-				        categories: ['Safety', 'Environment', 'Education', 'Transport', 'Nightlife'],
+				        categories: ['Nightlife', 'Environment', 'Transport', 'Education', 'Safety'],
 				        tickmarkPlacement: 'on',
 				        lineWidth: 0
 				    },
@@ -48,7 +48,7 @@
 				   
 				    series: [{
 				        name: 'Points (out of 10)',
-				        data: [10, 3, 7, 7, 9],
+				        data: <?=json_encode($this->spider)?>,
 				        pointPlacement: 'on'
 				    }]
 				});
