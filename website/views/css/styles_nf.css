@@ -1,0 +1,419 @@
+/*  SET ALL ELEMENTS BOX-SIZING TO BORDER-BOX */
+* { -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;}
+
+/* MAIN CONTAINER */
+.container {
+    margin: 40px auto;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(25,24,28,.75);
+    width: 66.0%;
+}
+
+
+/* SELF CLEARING FLOATS - CLEARFIX METHOD */
+.row:after, .col:after, .clr:after, .group:after {   
+    content: ""; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden; }
+
+
+/* DEFAULT ROW STYLES */
+.row { margin-bottom: 1.5em; } /* set according to preference*/
+            
+                                  
+/* DEFAULT COLUMN STYLES */
+.col { 
+    display: block;
+    float:left;
+    width: 100%;
+}
+
+@media ( max-width : 1080px ) {
+    input {
+        font-size: 1em !important;
+    }
+
+    .score > h3 {
+        font-size: 6em !important;
+    }
+
+    .score > span {
+        font-size: 1.5em !important;
+    }
+
+    span.outof {
+        font-size: 0.9em !important;
+    }
+
+}
+
+@media ( max-width : 768px ) {
+    .col {
+        margin-left: 2%;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+}
+
+@media ( max-width : 640px ) {
+    input {
+        font-size: 1em !important;
+    }
+
+    .score {
+        width: 94% !important;
+    }
+
+    .spider {
+        width: 94% !important;
+        margin: auto 3% !important;
+    }
+
+    body {
+        background: url("../img/city_bg.png") repeat top !important;
+    }
+
+    .summary h2 {
+        font-size: 1.5em !important;
+        margin-top:4%;
+    }
+
+    .summary p {
+        font-size: 1em !important;
+    }
+    
+    .proscons {
+        width: 94% !important;
+        margin: 0 3% 6% 3% !important;
+    }
+
+    .proscons div.nth-of-type(2) {
+        margin: 0 3% 3% 3% !important;
+    }
+
+    .proscons h2 {
+        font-size: 1.5em !important;
+        margin-top:4%;
+    }
+    
+    .proscons li {
+        font-size: 1em !important;
+    }
+
+}
+
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?96168821');
+  src: url('../font/fontello.eot?96168821#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?96168821') format('woff'),
+       url('../font/fontello.ttf?96168821') format('truetype'),
+       url('../font/fontello.svg?96168821#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* RESET MARGINS */
+.col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
+
+
+/* COLUMN WIDTH ON DISPLAYS +768px */
+@media ( min-width : 768px ) {
+    .span_1 { width: 6.5%; }
+    .span_2 { width: 15.0%; }
+    .span_3 { width: 23.5%; }
+    .span_4 { width: 32.0%; }
+    .span_5 { width: 40.5%; }
+    .span_6 { width: 49.0%; }
+    .span_7 { width: 57.5%; }
+    .span_8 { width: 66.0%; }
+    .span_9 { width: 74.5%; }
+    .span_10 { width: 83.0%; }
+    .span_11 { width: 91.5%; }
+    .span_12 { width: 100%; }
+}
+
+/* STYLES */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    background: url("../img/city_bg.png") repeat center;
+    color: #F56634;
+    overflow-x: hidden;
+}
+
+a {
+    border: 0px;
+}
+
+h1 {
+    font-size: 4em;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Lobster', cursive;
+    opacity: 1;
+    color: #F56634;
+}
+
+h1 > span {
+    opacity: .8;
+}
+
+h2 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+p.headline {
+    color: #404040;
+    font-size: 1.3em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    width: 70%;
+    text-align:center;
+    margin: 50px auto;
+    opacity: .5;   
+         -webkit-transition: .5s;
+     -moz-transition: .5s;
+     -ms-transition: .5s;
+     -o-transition: .5s;
+     transition: .5s;
+}
+
+p.headline :hover {
+     opacity: 1;
+     -webkit-transition: .5s;
+     -moz-transition: .5s;
+     -ms-transition: .5s;
+     -o-transition: .5s;
+     transition: .5s;
+}
+
+input {
+    width: 60%;
+    height: 60px;
+    font-size: 1.5em;
+    color: #F56634;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+    display: block;
+    border: 0px;
+
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    box-shadow: 0px -2px rgba(0,0,0,.25);
+    border: 1px solid rgba(0,0,0,.25);
+}
+
+/* RESULTS */
+
+.score {
+    width: 30%;
+    padding: 2% 5%;
+    background-color: #F56634;
+    float:left;
+    margin: 3%;
+    border-radius: 8px;
+    text-shadow: 0px 2px rgba(0,0,0,.25);
+}
+
+.score > span {
+    float:left;
+    font-size: 2em;
+    color: white;
+    width:100%;
+    text-align: center;
+    margin:-20px auto 20px auto;
+}
+
+.score > h3 {
+    text-align: center;
+    font-size: 8em;
+    float:left;
+    color: white;
+    width:100%;
+    text-align: center;
+}
+
+span.outof {
+    font-size: 1em;
+    opacity: .5;
+}
+
+.spider {
+    width: 61%;
+    padding: 2% 5%;
+    float: left;
+    margin: 3% 3% 3% 0;
+    border-radius: 8px;
+    height: 274px;
+    color: #F56634;
+    border: 1px solid #F56634;
+}
+
+.summary > h2 {
+    text-align: left;
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.summary {
+    width: 100%;
+    padding: 0;
+    float:left;
+    margin: 0 3%;
+    border-radius: 8px;
+    color: #F56634;
+}
+
+.summary > p {
+    font-size: 1.3em;
+    text-align: left;
+    color: #404040;
+    margin: 0 0 5% 0;
+    padding: 0;
+    width: 94%;
+}
+
+.proscons {
+    width: 44%;
+    padding: 0;
+    float:left;
+    margin: 0 3% 6% 3%;
+    border-radius: 8px;
+    color: #F56634;
+}
+
+.proscons > h2 {
+    text-align: left;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.proscons > ul {
+    margin: 0;
+}
+
+.proscons > ul > li {
+    margin: 5px 0;
+    font-size: 1.3em;
+    color: #404040;
+}
+
+.icon-ok, .icon-cancel-1 {
+    margin-right: 2%;
+    font-size: 1.3em;
+    color: #F56634;
+}
+
+.map {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+#map-canvas {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* CLOUDS */
+
+.x1 {
+    z-index: -1000;
+    position: absolute;
+    top:0px;
+    margin: 0px;
+    opacity: .7;
+    -webkit-animation: moveclouds 25s linear infinite;
+    -moz-animation: moveclouds 25s linear infinite;
+    -o-animation: moveclouds 25s linear infinite;
+}
+
+/*variable speed, opacity, and position of clouds for realistic effect*/
+.x2 {
+    z-index: -1000;
+    position: absolute;
+    top:0px;
+    margin: 0px;
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: .7; /*opacity proportional to the size*/
+    
+    /*Speed will also be proportional to the size and opacity*/
+    /*More the speed. Less the time in 's' = seconds*/
+    -webkit-animation: moveclouds 30s linear infinite;
+    -moz-animation: moveclouds 30s linear infinite;
+    -o-animation: moveclouds 30s linear infinite;
+}
+
+.x3 {
+    z-index: -1000;
+    top:0px;
+    margin: 0px;
+    position: absolute;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: .7; /*opacity proportional to the size*/
+    
+    -webkit-animation: moveclouds 25s linear infinite;
+    -moz-animation: moveclouds 25s linear infinite;
+    -o-animation: moveclouds 25s linear infinite;
+}
+
+.x4 {
+    z-index: -1000;
+    top:0px;
+    margin: 0px;
+    position: absolute;
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    transform: scale(0.75);
+    opacity: .7; /*opacity proportional to the size*/
+    
+    -webkit-animation: moveclouds 35s linear infinite;
+    -moz-animation: moveclouds 35s linear infinite;
+    -o-animation: moveclouds 35s linear infinite;
+}
+
+@-webkit-keyframes moveclouds {
+    0% {margin-left: 1500px;}
+    100% {margin-left: -1500px;}
+}
+@-moz-keyframes moveclouds {
+    0% {margin-left: 1500px;}
+    100% {margin-left: -1500px;}
+}
+@-o-keyframes moveclouds {
+    0% {margin-left: 1500px;}
+    100% {margin-left: -1500px;}
+}
+
+.footer {
+    vertical-align: middle;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.3em;
+    padding-bottom: 20px;
+}
