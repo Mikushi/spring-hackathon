@@ -4,6 +4,35 @@ namespace AreaScore
     class Score
     {
         private $_db;
+        private $_areaId;
+
+        public function setMySQL($conn) {
+            $this->_db = $conn;
+            return $this;
+        }
+
+        public function getAreaInfo() {
+            $info = [];
+            $query = "SELECT ea.*
+                      FROM `esd-area` as ea
+                      WHERE id = " . $this->_areaId;
+            $res = $this->_db->query($query);
+            if($res) {
+                $info = $res->fetch_assoc(); 
+                $query = "SELECT value, good_bad
+                          FROM `esd-area-good-bad`
+                          WHERE area_id = " . $this->_areaId;
+                $res = $this->_db->query($query);
+                if($res) {
+                    while($row = $res->fetch_assoc()) {
+                        $info[$row['good_bad']][] = $row['value'];
+                    }
+                }
+
+            }
+            return $info;
+        }
+
         public function getScore($postcode) {
             $postcodePrefix = strtoupper($this->_processPostcode($postcode)['prefix']); 
             $query = "SELECT area_id
@@ -12,7 +41,8 @@ namespace AreaScore
 
             $res = $this->_db->query($query);
             if($res) {
-                $areaId = $res->fetch_assoc()['area_id'];
+                $this->_areaId = $res->fetch_assoc()['area_id'];
+
 
                 //Retrieve the global stats to be used in the computation of the score
                 $stats = "SELECT metric_id, min, max, average, std_dev, category
@@ -31,7 +61,7 @@ namespace AreaScore
                 //Retrieve area specific score
                 $query = "SELECT value, metric_id
                           FROM `esd-metric-area`
-                          WHERE area_id = $areaId";
+                          WHERE area_id = " . $this->_areaId;
 
                 $res = $this->_db->query($query);
                 if($res) {
@@ -58,10 +88,7 @@ namespace AreaScore
             }
             return ["areaScore" => $areaScore, "breakdown" => $scoreByCat];
         }
-        public function setMySQL($conn) {
-            $this->_db = $conn;
-            return $this;
-        }
+
         /************************/
         /*  INTERNAL FUNCTIONS  */
         /************************/

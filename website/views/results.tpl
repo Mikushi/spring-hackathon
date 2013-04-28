@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Areascore - How good is your neighborhood?</title>
+		<title>Areascore - <?=strtoupper($this->postcode)?> in <?=$this->areaInfo['identifier']?> </title>
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/styles_nf.css">
 		<link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -13,29 +13,29 @@
 				<h2>How good is your neighborhood?</h2>
 
 				<div class="score animated tada">
-					<h3 class="counting">85</h3><span>POINTS</span><span class="outof">(out of 100)</span>
+					<h3 class="counting"><?=$this->areaScore?></h3><span>POINTS</span><span class="outof">(out of 100)</span>
 				</div>
 				<div class="spider">
 					Here comes the mighty spider X
 				</div>
 				<div class="summary">
-					<h2>Something about Islington</h2>
-					<p>The London Borough of Islington is a London borough in Inner London. It was formed in 1965 by merging the former metropolitan boroughs of Islington and Finsbury. The borough contains two Westminster parliamentary constituencies, Islington North and Islington South & Finsbury. The local authority is Islington Council.</p>
+					<h2>Something about <?=$this->areaInfo['identifier']?></h2>
+					<p><?=$this->areaInfo['description']?></p>
 				</div>
 				<div class="proscons">
 					<h2>The good things:</h2>
 					<ul>
-						<li><span class="icon-ok"></span>Mollis Etiam</li>
-						<li><span class="icon-ok"></span>Tellus Ornare Pellentesque</li>
-						<li><span class="icon-ok"></span>Ligula Egestas Justo</li>
+                    <?php foreach($this->areaInfo['good'] as $good): ?>
+						<li><span class="icon-ok"></span><?=$good?></li>
+                    <?php endforeach; ?>
 					</ul>
 				</div>
 				<div class="proscons">
 					<h2>The not too good things:</h2>
 					<ul>
-						<li><span class="icon-cancel-1"></span>Ultricies Egestas</li>
-						<li><span class="icon-cancel-1"></span>Ligula Egestas Justo</li>
-						<li><span class="icon-cancel-1"></span>Aenean Vulputate</li>
+                    <?php foreach($this->areaInfo['bad'] as $bad): ?>
+						<li><span class="icon-cancel-1"></span><?=$bad?></li>
+                    <?php endforeach; ?>
 					</ul>
 				</div>
 				<div class="footer">
