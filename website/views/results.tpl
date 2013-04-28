@@ -60,7 +60,7 @@
 				<h1><span>Area</span>Score</h1>
 				<h2>How good is your neighborhood?</h2>
 
-				<h3 class="postcode">You searched for XXX XXXX</h3>
+				<h3 class="postcode">You searched for <?=$this->postcode?></h3>
 
 				<div class="score animated tada">
 					<h3 class="counting"><?=$this->areaScore?></h3><span>POINTS</span><span class="outof">(out of 100)</span>
