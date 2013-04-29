@@ -4,6 +4,7 @@ class Result extends \Tachyon\Controller
     public function get() {
         $this->postcode = $this->getData("postcode", false);
         if($this->postcode) {
+            $this->postcode = str_replace(" ","", $this->postcode);
             $scoreFinder = (new \AreaScore\Score)->setMySQL(\AreaScore\MySQL::getInstance()->getConn());
             $score = $scoreFinder->getScore($this->postcode);
 
