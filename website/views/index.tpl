@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="css/styles_nf.css">
 		<link rel="stylesheet" type="text/css" href="css/animate.css">
 		<link rel="stylesheet" type="text/css" href="css/fontello.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href='http://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	</head>
 	<body style="overflow: hidden;">
